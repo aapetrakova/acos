@@ -485,7 +485,7 @@ template <typename T> void set_to_native(Float* flt, T real_double);
 
 template <typename T>
 void fuzz_bin_op(int exponent, int mantissa, const char* op_name, FloatBinOp* op, std::function<T(T, T)> f,
-                 nostd::source_location location = nostd::source_location::current()) {
+    int iterations = 10000, nostd::source_location location = nostd::source_location::current()) {
     TestLocation suite_location(location);
     srand(42);
 
