@@ -6,6 +6,7 @@
 #include <vector>
 #include <cstring>
 #include <climits>
+#include <cassert>
 
 typedef unsigned __int128 uint128_t;
 
@@ -120,7 +121,7 @@ public:
         for (; i < get_digit_count() && i * get_digit_bitlength() < sizeof(other) * CHAR_BIT; ++i) {
             get_digits()[i] = other >> i * get_digit_bitlength();
         }
-        if(is_signed() && value < 0) {
+        if(get_signed() && other < 0) {
             for (; i < get_digit_count(); i++) {
                 get_digits()[i] = -1;
             }
@@ -295,7 +296,7 @@ public:
     }
 
     constexpr LongInt operator ~() const {
-        LongInt result;
+        auto result = *this;
         for (int i = 0; i < get_digit_count(); ++i) {
             result.get_digits()[i] = ~get_digits()[i];
         }
