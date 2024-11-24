@@ -20,6 +20,7 @@ int lfstack_init(lfstack_t *stack)
 int lfstack_push(lfstack_t *stack, uintptr_t value)
 ```
 - операция извлечения элемента из стека, полученное значение сохраняется в `*value`
+    - извлечение элемента из пустого стека должно корректно обрабатываться (с кодом `0`) и возвращать `value = 0`
 ```c++
 int lfstack_pop(lfstack_t *stack, uintptr_t *value)
 ```
