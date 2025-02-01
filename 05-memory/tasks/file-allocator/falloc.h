@@ -1,4 +1,10 @@
 #include <stdint.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 enum {
     PAGE_SIZE = 4096,
