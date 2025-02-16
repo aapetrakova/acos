@@ -1,5 +1,5 @@
-.text
-.global longest_inc_subseq
+  .text
+  .global longest_inc_subseq
 
 longest_inc_subseq:
     cmp x2, 0
@@ -8,42 +8,43 @@ longest_inc_subseq:
     mov x3, 1
     mov x4, 0
 
-outer_loop:
+out_loop:
     cmp x4, x2
-    bge exit_outer_loop
+    bge exit_out
 
     mov x5, 0
-    str wzr, [x1, x4, lsl #3]
+    mov x7, 1
+    str x7, [x1, x4, lsl 3]
 
-inner_loop:
+in_loop:
     cmp x5, x4
-    bge exit_inner_loop
+    bge exit_in
 
-    ldr x6, [x0, x4, lsl #3]
-    ldr x7, [x0, x5, lsl #3]
+    ldr x6, [x0, x4, lsl 3]
+    ldr x7, [x0, x5, lsl 3]
     cmp x6, x7
-    ble skip_assignment
+    ble skip
 
-    ldr x8, [x1, x5, lsl #3]
+    ldr x8, [x1, x5, lsl 3]
     add x8, x8, 1
-    ldr x9, [x1, x4, lsl #3]
+    ldr x9, [x1, x4, lsl 3]
     cmp x8, x9
-    ble skip_assignment
+    ble skip
 
-    str x8, [x1, x4, lsl #3]
+    str x8, [x1, x4, lsl 3]
     cmp x3, x8
-    bge skip_assignment
+    bge skip
     mov x3, x8
 
-skip_assignment:
+skip:
     add x5, x5, 1
-    b inner_loop
+    b in_loop
 
-exit_inner_loop:
+exit_in:
     add x4, x4, 1
-    b outer_loop
+    b out_loop
 
-exit_outer_loop:
+exit_out:
     mov x0, x3
     ret
 
