@@ -55,7 +55,7 @@ void perform_search(pcre* regex_pattern, const char* file_path) {
       return;
     }
 
-    char* mapped_file = mmap(NULL, file_stat.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
+    char* mapped_file = mmap(NULL, file_stat.st_size, PROT_READ, MAP_PRIVATE | MAP_FILE, fd, 0);
     if (mapped_file == MAP_FAILED) {
       perror("Failed to map file");
       close(fd);
